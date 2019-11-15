@@ -1,0 +1,58 @@
+{
+	"name": "@plokkke/toolbox",
+	"version": "0.1.0",
+	"author": "Antoine Caron <acaron@ineat.fr>",
+	"license": "MIT",
+	"description": "Some utilitary functions",
+	"keywords": [
+		"Toolbox",
+		"Utils"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git://gitlab.com:antoinecaron/toolbox.git"
+	},
+	"main": "sources/index.ts",
+	"scripts": {
+		"test": "mocha -r ts-node/register **/*.test.ts **/*.test.js",
+		"coverage": "nyc npm run test"
+	},
+	"nyc": {
+		"extension": [
+			".ts",
+			".js"
+		],
+		"include": [
+			"sources"
+		],
+		"exclude": [
+			"**/*.test.ts/",
+			"**/*.test.js/"
+		],
+		"reporter": [
+			"text-summary",
+			"html"
+		]
+	},
+	"dependencies": {
+		"@types/bluebird": "^3.5.28",
+		"@types/lodash": "^4.14.147",
+		"@types/node": "^12.12.7",
+		"bluebird": "^3.7.1",
+		"eratum": "^2.0.0",
+		"lodash": "^4.17.15"
+	},
+	"devDependencies": {
+		"@types/chai": "^4.2.5",
+		"@types/mocha": "^5.2.7",
+		"chai": "^4.2.0",
+		"eslint": "^6.6.0",
+		"eslint-config-airbnb-base": "^14.0.0",
+		"eslint-plugin-import": "^2.18.2",
+		"mocha": "^4.1.0",
+		"nyc": "^11.3.0",
+		"ts-mocha": "^6.0.0",
+		"ts-node": "^8.5.0",
+		"typescript": "^3.7.2"
+	}
+}
