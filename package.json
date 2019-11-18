@@ -1,6 +1,6 @@
 {
 	"name": "@plokkke/toolbox",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"author": "Antoine Caron <acaron@ineat.fr>",
 	"license": "MIT",
 	"description": "Some utilitary functions",
