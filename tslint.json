@@ -62,7 +62,14 @@
 				"singleline": "never"
 			}
 		],
-		"triple-equals": true
+		"triple-equals": true,
+		"variable-name": {
+			"options": [
+				"ban-keywords",
+				"check-format",
+				"allow-leading-underscore"
+			]
+		}
 	},
 	"rulesDirectory": []
 }

@@ -12,27 +12,19 @@
 		"type": "git",
 		"url": "git://gitlab.com:antoinecaron/toolbox.git"
 	},
-	"main": "sources/index.ts",
+	"main": "build/sources/index.js",
+	"types": "build/sources/index.d.ts",
+	"files": [
+		"build/**/*"
+	],
 	"scripts": {
+		"build": "tsc",
+		"coverage": "nyc npm run test",
+		"lint": "tslint -p tsconfig.json",
+		"produce": "npm run lint && npm run build && npm run test",
+		"postversion": "git push && git push --tags && npm publish",
 		"test": "mocha -r ts-node/register **/*.test.ts **/*.test.js",
-		"coverage": "nyc npm run test"
-	},
-	"nyc": {
-		"extension": [
-			".ts",
-			".js"
-		],
-		"include": [
-			"sources"
-		],
-		"exclude": [
-			"**/*.test.ts/",
-			"**/*.test.js/"
-		],
-		"reporter": [
-			"text-summary",
-			"html"
-		]
+		"version": "npm run produce"
 	},
 	"dependencies": {
 		"@types/bluebird": "^3.5.28",
@@ -54,5 +46,21 @@
 		"ts-mocha": "^6.0.0",
 		"ts-node": "^8.5.0",
 		"typescript": "^3.7.2"
+	},
+	"nyc": {
+		"extension": [
+			".ts"
+		],
+		"include": [
+			"sources"
+		],
+		"exclude": [
+			"**/*.test.ts/",
+			"sources/Validator.ts"
+		],
+		"reporter": [
+			"text-summary",
+			"html"
+		]
 	}
 }
