@@ -1,3 +1,4 @@
+import util from 'util';
 import Errors from 'eratum';
 
 export function insertIf<T>(condition: boolean, ...elements: T[]): T[] {
@@ -23,4 +24,8 @@ export function randomString(length: number, symbols: string = SYMOBOLS.ALPHA) {
 		result += _symbols.charAt(Math.floor(Math.random() * _symbols.length));
 	}
 	return result;
+}
+
+export function stringify(...args: any[]) {
+	return args.map(item => util.inspect(item, { showHidden: false, depth: null })).join(', ');
 }

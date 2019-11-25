@@ -20,7 +20,7 @@
 	"scripts": {
 		"build": "tsc",
 		"coverage": "nyc npm run test",
-		"lint": "tslint -p tsconfig.json",
+		"lint": "tslint -p tsconfig.json -o reports/tslint.report && eslint --ignore-pattern build -o reports/eslint.report **/**.js",
 		"produce": "npm run lint && npm run build && npm run test",
 		"postversion": "git push && git push --tags && npm publish",
 		"test": "mocha -r ts-node/register **/*.test.ts **/*.test.js",
@@ -28,8 +28,8 @@
 	},
 	"dependencies": {
 		"@types/bluebird": "^3.5.28",
-		"@types/lodash": "^4.14.147",
-		"@types/node": "^12.12.7",
+		"@types/lodash": "^4.14.149",
+		"@types/node": "^12.12.12",
 		"bluebird": "^3.7.1",
 		"eratum": "^2.0.0",
 		"lodash": "^4.17.15"
@@ -38,7 +38,7 @@
 		"@types/chai": "^4.2.5",
 		"@types/mocha": "^5.2.7",
 		"chai": "^4.2.0",
-		"eslint": "^6.6.0",
+		"eslint": "^6.7.1",
 		"eslint-config-airbnb-base": "^14.0.0",
 		"eslint-plugin-import": "^2.18.2",
 		"mocha": "^4.1.0",
@@ -59,8 +59,9 @@
 			"sources/Validator.ts"
 		],
 		"reporter": [
-			"text-summary",
-			"html"
+			"html",
+			"lcovonly",
+			"text-summary"
 		]
 	}
 }
