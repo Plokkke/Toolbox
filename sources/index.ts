@@ -13,19 +13,19 @@ export const SYMOBOLS = {
 	HEXA: '1234567890ABCDEF',
 };
 
-export function randomString(length: number, symbols: string = SYMOBOLS.ALPHA) {
-	const _length = typeof length === 'number' ? length : 0;
-	const _symbols = typeof symbols === 'string' ? symbols : SYMOBOLS.ALPHA;
-	if (_length && !_symbols.length) {
-		Errors.invalid({ name: 'symbols', origin: 'TOOLBOX', cause: Errors.equal({ name: 'symbols.length', value: _symbols.length }) });
+export function randomString(length: number, symbols: string = SYMOBOLS.ALPHA): string {
+	const safeLength = typeof length === 'number' ? length : 0;
+	const safeSymbols = typeof symbols === 'string' ? symbols : SYMOBOLS.ALPHA;
+	if (safeLength && !safeSymbols.length) {
+		Errors.invalid({ name: 'symbols', origin: 'TOOLBOX', cause: Errors.equal({ name: 'symbols.length', value: safeSymbols.length }) });
 	}
 	let result = '';
-	for (let i = 0; i < _length; i += 1) {
-		result += _symbols.charAt(Math.floor(Math.random() * _symbols.length));
+	for (let i = 0; i < safeLength; i += 1) {
+		result += safeSymbols.charAt(Math.floor(Math.random() * safeSymbols.length));
 	}
 	return result;
 }
 
-export function stringify(...args: any[]) {
-	return args.map(item => util.inspect(item, { showHidden: false, depth: null })).join(', ');
+export function stringify(...args: any[]): string {
+	return args.map((item) => util.inspect(item, { showHidden: false, depth: null })).join(', ');
 }
