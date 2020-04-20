@@ -29,3 +29,11 @@ export function randomString(length: number, symbols: string = SYMOBOLS.ALPHA): 
 export function stringify(...args: any[]): string {
 	return args.map((item) => util.inspect(item, { showHidden: false, depth: null })).join(', ');
 }
+
+export function deepFreeze(item: any = { }): typeof item {
+	Object.freeze(item);
+	Object.getOwnPropertyNames(item)
+		.filter((prop) => !Object.isFrozen(item[prop]))
+		.forEach((prop) => deepFreeze(item[prop]));
+	return item;
+}

@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import 'mocha';
 import Errors from 'eratum';
 
-import { insertIf, randomString, SYMOBOLS } from '../sources';
+import { deepFreeze, insertIf, randomString, SYMOBOLS } from '../sources';
 
 describe('Typescript tests', () => {
 	describe('Test insertIf', () => {
@@ -50,6 +50,32 @@ describe('Typescript tests', () => {
 			expect(identifer).a('string');
 			expect(identifer).property('length').equal(length);
 			expect(identifer).match(new RegExp(`^[${SYMOBOLS.ALPHA}]+$`));
+		});
+	});
+
+	describe('Test deepFreeze', () => {
+		it('Should return parameter', () => {
+			const a = {};
+			const b = deepFreeze(a);
+			expect(b).equal(a);
+			expect(b).not.equal({});
+		});
+		it('Should return frozen object', () => {
+			const a = {};
+			expect(Object.isFrozen(a)).equal(false);
+			const b = deepFreeze(a);
+			expect(Object.isFrozen(b)).equal(true);
+		});
+		it('Should return frozen nested object', () => {
+			const a = { nested: {} };
+			expect(Object.isFrozen(a)).equal(false);
+			expect(Object.isFrozen(a.nested)).equal(false);
+			Object.freeze(a);
+			expect(Object.isFrozen(a)).equal(true);
+			expect(Object.isFrozen(a.nested)).equal(false);
+			deepFreeze(a);
+			expect(Object.isFrozen(a)).equal(true);
+			expect(Object.isFrozen(a.nested)).equal(true);
 		});
 	});
 });
