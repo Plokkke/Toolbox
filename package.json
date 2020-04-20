@@ -1,7 +1,7 @@
 {
 	"name": "@plokkke/toolbox",
 	"private": false,
-	"version": "0.2.1",
+	"version": "0.2.4",
 	"author": "Antoine Caron <acaron@ineat.fr>",
 	"license": "MIT",
 	"description": "Some utilitarian functions",
@@ -9,10 +9,8 @@
 		"Toolbox",
 		"Utils"
 	],
-	"repository": {
-		"type": "git",
-		"url": "git://gitlab.com:antoinecaron/toolbox.git"
-	},
+	"homepage": "https://gitlab.com/antoinecaron/toolbox",
+	"repository": "gitlab:antoinecaron/toolbox",
 	"main": "build/sources/index.js",
 	"types": "build/sources/index.d.ts",
 	"files": [
