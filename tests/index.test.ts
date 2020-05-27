@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import 'mocha';
 import Errors from 'eratum';
 
-import { deepFreeze, insertIf, randomString, SYMOBOLS } from '../sources';
+import { deepFreeze, insertIf, randomString, SYMOBOLS, iterate } from '../sources';
 
 describe('Typescript tests', () => {
 	describe('Test insertIf', () => {
@@ -76,6 +76,15 @@ describe('Typescript tests', () => {
 			deepFreeze(a);
 			expect(Object.isFrozen(a)).equal(true);
 			expect(Object.isFrozen(a.nested)).equal(true);
+		});
+	});
+
+	describe('Test iterate', () => {
+		it('Should return iterable array', () => {
+			const size = 14;
+			let length = 0;
+			iterate(size).forEach(() => (length += 1));
+			expect(length).equal(size);
 		});
 	});
 });

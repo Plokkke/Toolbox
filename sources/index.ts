@@ -37,3 +37,7 @@ export function deepFreeze(item: any = { }): typeof item {
 		.forEach((prop) => deepFreeze(item[prop]));
 	return item;
 }
+
+export function iterate(length: number): undefined[] {
+	return typeof length === 'number' ? Array.from(new Array(length)) : [];
+}
