@@ -1,7 +1,7 @@
 {
 	"name": "@plokkke/toolbox",
 	"private": false,
-	"version": "0.2.6",
+	"version": "0.3.1",
 	"author": "Antoine Caron <acaron@ineat.fr>",
 	"license": "MIT",
 	"description": "Some utilitarian functions",
@@ -11,62 +11,46 @@
 	],
 	"homepage": "https://gitlab.com/antoinecaron/toolbox",
 	"repository": "gitlab:antoinecaron/toolbox",
-	"main": "build/sources/index.js",
-	"types": "build/sources/index.d.ts",
+	"main": "build/src/index.js",
+	"types": "build/src/index.d.ts",
 	"files": [
 		"build/**/*"
 	],
 	"scripts": {
 		"build": "tsc -p tsconfig.json",
-		"coverage": "nyc npm run test",
 		"pregit-tag": "git fetch --all",
 		"git-tag": "PKG_VERSION=$(jq -r \".version\" package.json) && test \"$(git rev-list -n 1 v${PKG_VERSION} 2> /dev/null)\" == \"$(git rev-list -n 1 HEAD)\" || git tag v${PKG_VERSION}",
 		"postgit-tag": "for remote in $(git remote); do git push $remote --tags; done",
-		"lint": "eslint --ignore-pattern build -o reports/eslint.report **/**.ts",
 		"produce": "npm run lint && npm run test && npm run build",
 		"prerelease": "git diff --quiet && npm run produce",
 		"release": "npm run git-tag && if [[ $(jq -r \".private\" package.json) = \"false\" ]]; then npm publish --tag next; fi",
-		"test": "mocha -r ts-node/register **/*.test.ts **/*.test.js",
-		"watch-test": "nodemon -e 'js,ts' -i build -x 'npm run test'"
+		"format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+		"lint": "eslint \"{src,test}/**/*.ts\" --fix",
+		"test": "jest",
+		"test:watch": "jest --watch",
+		"test:cov": "jest --coverage",
+		"publish:latest": "PKG_VERSION=$(jq -r \".version\" package.json) && npm dist-tag add @plokkke/toolbox@${PKG_VERSION} --tag latest"
 	},
 	"dependencies": {
-		"@types/bluebird": "^3.5.32",
-		"@types/lodash": "^4.14.153",
-		"@types/node": "^14.0.5",
-		"bluebird": "^3.7.1",
 		"eratum": "^2.0.6",
-		"lodash": "^4.17.15"
+		"lodash": "^4.17.15",
+		"luxon": "^3.4.4"
 	},
 	"devDependencies": {
-		"@types/chai": "^4.2.5",
-		"@types/mocha": "^7.0.2",
-		"@typescript-eslint/eslint-plugin": "^3.0.1",
-		"@typescript-eslint/parser": "^3.0.1",
-		"chai": "^4.2.0",
-		"eslint": "^7.1.0",
-		"eslint-config-airbnb-base": "^14.1.0",
-		"eslint-plugin-import": "^2.20.2",
-		"mocha": "^7.2.0",
-		"nodemon": "^2.0.4",
-		"nyc": "^15.0.1",
-		"ts-mocha": "^7.0.0",
-		"ts-node": "^8.10.1",
-		"typescript": "^3.9.3"
-	},
-	"nyc": {
-		"extension": [
-			".ts"
-		],
-		"include": [
-			"sources"
-		],
-		"exclude": [
-			"**/*.test.ts/"
-		],
-		"reporter": [
-			"html",
-			"lcovonly",
-			"text-summary"
-		]
+		"@types/jest": "^29.5.2",
+		"@types/lodash": "^4.14.153",
+		"@types/luxon": "^3.4.0",
+		"@types/node": "^20.10.8",
+		"@typescript-eslint/eslint-plugin": "^6.0.0",
+		"@typescript-eslint/parser": "^6.0.0",
+		"eslint": "^8.42.0",
+		"eslint-config-prettier": "^9.0.0",
+		"eslint-plugin-prettier": "^5.0.0",
+		"jest": "^29.5.0",
+		"prettier": "^3.0.0",
+		"supertest": "^6.3.3",
+		"ts-jest": "^29.1.0",
+		"ts-node": "^10.9.2",
+		"typescript": "^5.3.3"
 	}
 }
