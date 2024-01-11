@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import Errors from 'eratum';
-import { Optional, Transformer } from './types';
+
+import { Optional, Transformer } from '@/types';
 
 export function setter<T extends Record<K, unknown>, K extends keyof T>(object: T, key: K): (value: T[K]) => T {
   return _.partial(_.set, object, key) as (value: T[K]) => T;

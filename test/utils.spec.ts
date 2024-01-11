@@ -1,4 +1,4 @@
-import { insertIf, instanceOf, skipFalsy, stringify } from '../src';
+import { insertIf, instanceOf, skipFalsy, stringify } from '@/utils';
 
 describe('General', () => {
   describe('insertIf', () => {

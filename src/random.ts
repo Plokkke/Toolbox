@@ -3,7 +3,7 @@ import { Duration } from 'luxon';
 import Errors from 'eratum';
 import { DurationUnit } from 'luxon/src/duration';
 
-import * as RandomModule from './random';
+import * as RandomModule from '@/random';
 
 export const SYMOBOLS = {
   ALPHA_LOWER: 'azertyuiopqsdfghjklmwxcvbn',
@@ -115,4 +115,8 @@ export function isIndexPicked(index: number, density: number[]): boolean {
  */
 export function randomDelayInInterval(durationMin: Duration, durationMax: Duration, unit: DurationUnit = 'days'): number {
   return RandomModule.randomInt(durationMin.as(unit), durationMax.as(unit));
+}
+
+export function randomItem<T>(items: T[]): T {
+  return items[RandomModule.randomInt(items.length - 1)];
 }

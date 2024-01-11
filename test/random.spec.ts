@@ -236,4 +236,17 @@ describe('Random utils', () => {
       expect(mock).toHaveBeenCalledWith(1 * 24, 4 * 24);
     });
   });
+
+  describe('randomItem', () => {
+    it('should return a random item from the given array', () => {
+      const items = [1, 2, 3, 4, 5];
+
+      const mock = jest.spyOn(RandomModule, 'randomInt').mockImplementation(() => 2);
+
+      const result = RandomModule.randomItem(items);
+
+      expect(result).toBe(3);
+      expect(mock).toHaveBeenCalledWith(4);
+    });
+  });
 });
