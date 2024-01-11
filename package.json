@@ -1,7 +1,7 @@
 {
 	"name": "@plokkke/toolbox",
 	"private": false,
-	"version": "0.3.1",
+	"version": "0.3.2",
 	"author": "Antoine Caron <acaron@ineat.fr>",
 	"license": "MIT",
 	"description": "Some utilitarian functions",
@@ -14,7 +14,7 @@
 	"main": "build/src/index.js",
 	"types": "build/src/index.d.ts",
 	"files": [
-		"build/**/*"
+		"dist/**/*"
 	],
 	"scripts": {
 		"build": "tsc -p tsconfig.json",
