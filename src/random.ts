@@ -3,8 +3,6 @@ import { Duration } from 'luxon';
 import Errors from 'eratum';
 import { DurationUnit } from 'luxon/src/duration';
 
-import * as RandomModule from '@/random';
-
 export const SYMOBOLS = {
   ALPHA_LOWER: 'azertyuiopqsdfghjklmwxcvbn',
   ALPHA_UPPER: 'AZERTYUIOPQSDFGHJKLMWXCVBN',
@@ -64,13 +62,13 @@ export function randomIdxByDensity(density: number[]): number {
  */
 export function randomIdxByWeight(weights: number[]): number {
   const sum = _.sum(weights);
-  return sum ? RandomModule.randomIdxByDensity(_.map(weights, (weight) => weight / sum)) : -1;
+  return sum ? exports.randomIdxByDensity(_.map(weights, (weight) => weight / sum)) : -1;
 }
 
 export function randomKeyByWeight(record: Record<string, number>): string {
   const entries = Object.entries(record);
   const weights = entries.map(([, weight]) => weight);
-  const index = RandomModule.randomIdxByWeight(weights);
+  const index = exports.randomIdxByWeight(weights);
   return entries[index][0];
 }
 
@@ -114,9 +112,9 @@ export function isIndexPicked(index: number, density: number[]): boolean {
  * Return a random number between min and max
  */
 export function randomDelayInInterval(durationMin: Duration, durationMax: Duration, unit: DurationUnit = 'days'): number {
-  return RandomModule.randomInt(durationMin.as(unit), durationMax.as(unit));
+  return exports.randomInt(durationMin.as(unit), durationMax.as(unit));
 }
 
 export function randomItem<T>(items: T[]): T {
-  return items[RandomModule.randomInt(items.length - 1)];
+  return items[exports.randomInt(items.length - 1)];
 }
